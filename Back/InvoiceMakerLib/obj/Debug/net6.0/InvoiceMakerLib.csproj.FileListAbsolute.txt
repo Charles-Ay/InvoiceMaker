@@ -1,0 +1,12 @@
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.csproj.AssemblyReference.cache
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.AssemblyInfoInputs.cache
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.AssemblyInfo.cs
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.csproj.CoreCompileInputs.cache
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\bin\Debug\net6.0\InvoiceMakerLib.deps.json
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\bin\Debug\net6.0\InvoiceMakerLib.dll
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\bin\Debug\net6.0\InvoiceMakerLib.pdb
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.dll
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\refint\InvoiceMakerLib.dll
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\InvoiceMakerLib.pdb
+C:\Users\charl\Documents\Programming\C#\InvoiceMaker\InvoiceMakerLib\obj\Debug\net6.0\ref\InvoiceMakerLib.dll
