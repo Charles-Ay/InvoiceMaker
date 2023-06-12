@@ -67,7 +67,7 @@ function Employees() {
     k = k.replaceAll('\\"', '"');
     k = k.replaceAll('""', '"');
 
-    fetch("https://localhost:7171/api/Invoice", {
+    fetch("https://invoicemakerapi.azurewebsites.net/api/Invoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

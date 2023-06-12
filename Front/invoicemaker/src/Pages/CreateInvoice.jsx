@@ -75,7 +75,7 @@ function CreateInvoice() {
   };
 
   const pushCustomer = () => {
-    fetch("https://localhost:7171/api/Customer", {
+    fetch("https://invoicemakerapi.azurewebsites.net/api/Customer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,10 @@ function CreateInvoice() {
   };
 
   const getCustomer = (_id) => {
-    fetch("https://localhost:7171/api/Customer/GetCustomer?id=" + _id)
+    fetch(
+      "https://invoicemakerapi.azurewebsites.net/api/Customer/GetCustomer?id=" +
+        _id
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.name !== "Not Found") setCustomer(data);
