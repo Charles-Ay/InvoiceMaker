@@ -20,12 +20,14 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 var init = false;
 function CreateInvoice() {
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceDate, setInvoiceDate] = useState({});
+
+  const [company, setCompany] = useState({});
 
   const [customer, setCustomer] = useState({});
   const [contact, setContact] = useState({});
@@ -82,6 +84,15 @@ function CreateInvoice() {
     });
   };
 
+  const getCustomer = (_id) => {
+    fetch("https://localhost:7171/api/Customer/GetCustomer?id=" + _id)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.name !== "Not Found") setCustomer(data);
+        else alert("Customer not found.");
+      });
+  };
+
   if (customers.length > 0 && names.length === 0) GetNames();
 
   return (
@@ -131,6 +142,9 @@ function CreateInvoice() {
               variant="outlined"
               fullWidth
               margin="normal"
+              onChange={(e) => {
+                setCompany({ ...company, name: e.target.value });
+              }}
             />
             <TextField
               placeholder="Address"
@@ -138,6 +152,39 @@ function CreateInvoice() {
               variant="outlined"
               fullWidth
               margin="normal"
+              onChange={(e) => {
+                setCompany({ ...company, address: e.target.value });
+              }}
+            />
+            <TextField
+              placeholder="Company City"
+              label="Company City"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              onChange={(e) => {
+                setCompany({ ...company, city: e.target.value });
+              }}
+            />
+            <TextField
+              placeholder="Company Province"
+              label="Company Province"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              onChange={(e) => {
+                setCompany({ ...company, province: e.target.value });
+              }}
+            />
+            <TextField
+              placeholder="Company Postal Code"
+              label="Company Postal Code"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              onChange={(e) => {
+                setCompany({ ...company, postalCode: e.target.value });
+              }}
             />
             <Typography variant="h5" component="div" align="center">
               To
@@ -149,6 +196,11 @@ function CreateInvoice() {
               renderInput={(params) => (
                 <TextField {...params} label="Customer" />
               )}
+              onChange={(event, newValue) => {
+                setCustomer(
+                  ...customers.filter((customer) => customer.name === newValue)
+                );
+              }}
             />
             <Button variant="outlined" onClick={handleClickOpen}>
               <Typography variant="h6" component="div" align="center">
@@ -250,15 +302,26 @@ function CreateInvoice() {
             variant="contained"
             color="primary"
             onClick={() => {
-              if (invoiceNumber !== "" && invoiceDate !== {} && customer !== {})
+              if (
+                invoiceNumber !== "" &&
+                invoiceDate !== {} &&
+                customer !== {}
+              ) {
                 navigate("/add-employees", {
                   state: {
                     invoiceNumber: invoiceNumber,
-                    invoiceDate: invoiceDate,
+                    invoiceDate: JSON.stringify(invoiceDate),
                     customer: customer,
+                    company: {
+                      name: company.name,
+                      address: company.address,
+                      city: company.city,
+                      province: company.province,
+                      postalCode: company.postalCode,
+                    },
                   },
                 });
-              else alert("Please fill out all fields.");
+              } else alert("Please fill out all fields.");
             }}
           >
             Next

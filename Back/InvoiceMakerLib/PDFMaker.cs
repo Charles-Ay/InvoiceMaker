@@ -18,8 +18,8 @@ namespace InvoiceMakerLib
             var document = new Document(pdf);
             document.Add(new Paragraph("INVOICE").SetFontSize(50).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE));
             document.Add(new Paragraph(" "));
-            document.Add(new Paragraph("VALLEYSIDE HEALTHCARE SERVICES INC.").SetFontSize(16).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")));
-            document.Add(new Paragraph("35 HUMMINGBIRD LANE, \nST. THOMAS, ON").SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibril.ttf")).SetFontSize(14));
+            document.Add(new Paragraph(data.Company.Name!.ToUpper() +".").SetFontSize(16).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")));
+            document.Add(new Paragraph($"{data.Company.Address!.ToUpper()}, \n{data.Company.City!.ToUpper()}, {data.Company.Province!.ToUpper()}").SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibril.ttf")).SetFontSize(14));
             document.Add(new Paragraph(" "));
             document.Add(new Paragraph("INVOICE DATE: " + data.Date.ToString("MM/dd/yyyy")).SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE));
             

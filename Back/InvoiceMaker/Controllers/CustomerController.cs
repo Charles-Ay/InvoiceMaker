@@ -17,6 +17,21 @@ namespace InvoiceMaker.Controllers
             return CustomerView.GetCustomers();
         }
 
+        [HttpGet]
+        [Route("GetCustomer")]
+        public Customer GetCustomer(string id)
+        {
+            var c = CustomerView.GetCustomers().Find(c => c._id == id);
+            if(c!= null)
+            {
+                return c;
+            }
+            else
+            {
+                return new Customer() { Name = "Not Found" };
+            }
+        }
+
         // POST api/<CustomerController>
         [HttpPost]
         public void Post([FromBody] Customer value)

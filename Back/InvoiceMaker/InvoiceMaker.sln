@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceMaker", "InvoiceMaker.csproj", "{10A84C4F-6836-440A-9A49-CACF84FA69B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceMaker", "InvoiceMaker.csproj", "{10A84C4F-6836-440A-9A49-CACF84FA69B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceMakerLib", "..\InvoiceMakerLib\InvoiceMakerLib.csproj", "{5DD6CFBD-794C-4C84-B160-E25E7D2F2B58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{10A84C4F-6836-440A-9A49-CACF84FA69B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A84C4F-6836-440A-9A49-CACF84FA69B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10A84C4F-6836-440A-9A49-CACF84FA69B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD6CFBD-794C-4C84-B160-E25E7D2F2B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD6CFBD-794C-4C84-B160-E25E7D2F2B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD6CFBD-794C-4C84-B160-E25E7D2F2B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD6CFBD-794C-4C84-B160-E25E7D2F2B58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,4 +12,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InvoiceMakerLib\InvoiceMakerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="InvoiceMakerLib">
+      <HintPath>Libs\InvoiceMakerLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
