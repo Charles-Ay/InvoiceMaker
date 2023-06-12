@@ -19,6 +19,17 @@ namespace InvoiceMaker
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000", "https://invoicemakerapi.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -33,8 +44,7 @@ namespace InvoiceMaker
 
             app.UseStaticFiles();
 
-            // Enable CORS policy
-            app.UseCors("CorsPolicy");
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.MapControllers();
 

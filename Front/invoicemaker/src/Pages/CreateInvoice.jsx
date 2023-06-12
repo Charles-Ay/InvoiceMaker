@@ -40,7 +40,7 @@ function CreateInvoice() {
 
   useEffect(() => {
     if (!init) {
-      fetch("invoicemakerapi.azurewebsites.net/api/Customer")
+      fetch("https://invoicemakerapi.azurewebsites.net/api/customer")
         .then((res) => res.json())
         .then((data) => {
           setCustomers(data);
