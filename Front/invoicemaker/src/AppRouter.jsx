@@ -11,6 +11,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/InvoiceMaker" element={<App />} />
         <Route path="/create-invoice" element={<CreateInvoice />} />
         <Route path="/add-employees" element={<Employees />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
