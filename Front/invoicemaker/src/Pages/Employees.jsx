@@ -83,7 +83,7 @@ function Employees() {
         const a = document.createElement("a");
         a.style.display = "none";
         a.href = url;
-        a.download = "InvoicePDF"; // name you want to save the file with
+        a.download = "InvoicePDF";
         document.body.appendChild(a);
         a.click();
 
