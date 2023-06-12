@@ -26,7 +26,7 @@ namespace InvoiceMaker
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "https://invoicemakerapi.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("http://localhost:3000", "https://invoicemakerapi.azurewebsites.net", "https://invoice-maker-rose.vercel.app/").AllowAnyHeader().AllowAnyMethod();
                 });
             });
 
