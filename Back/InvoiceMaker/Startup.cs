@@ -1,4 +1,6 @@
-﻿namespace InvoiceMaker
+﻿using Microsoft.OpenApi.Models;
+
+namespace InvoiceMaker
 {
     public class Startup
     {
@@ -14,6 +16,11 @@
             });
 
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "InvoiceMaker API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
