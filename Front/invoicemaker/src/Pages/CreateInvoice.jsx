@@ -35,8 +35,44 @@ function CreateInvoice() {
   const [names, setNames] = useState([]);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [errorDialog, setErrorDialog] = useState(false);
 
   const navigate = useNavigate();
+
+  const inputValidation = () => {
+    let valid = true;
+    let message = "";
+
+    if (
+      invoiceNumber === "" ||
+      Number.isInteger(Number.parseInt(invoiceNumber)) === false
+    ) {
+      message = "Please enter a valid invoice number.";
+      valid = false;
+    } else if (invoiceDate.$y === "" || invoiceDate.$y === undefined) {
+      message = "Please enter an invoice date.";
+      valid = false;
+    } else if (company.name === "" || company.name === undefined) {
+      message = "Please enter a company name.";
+      valid = false;
+    } else if (company.address === "" || company.address === undefined) {
+      message = "Please enter a company address.";
+      valid = false;
+    } else if (company.city === "" || company.city === undefined) {
+      message = "Please enter a company city.";
+      valid = false;
+    } else if (company.province === "" || company.province === undefined) {
+      message = "Please enter a company province.";
+      valid = false;
+    } else if (company.postalCode === "" || company.postalCode === undefined) {
+      message = "Please enter a company postal code.";
+      valid = false;
+    } else if (customer.name === "" || customer.name === undefined) {
+      message = "Please select a customer.";
+      valid = false;
+    }
+    return { valid, message };
+  };
 
   useEffect(() => {
     if (!init) {
@@ -74,6 +110,10 @@ function CreateInvoice() {
     setOpen(false);
   };
 
+  const handleErrorDialogClose = () => {
+    setErrorDialog(false);
+  };
+
   const pushCustomer = () => {
     fetch("https://invoicemakerapi.azurewebsites.net/api/Customer", {
       method: "POST",
@@ -85,10 +125,7 @@ function CreateInvoice() {
   };
 
   const getCustomer = (_id) => {
-    fetch(
-      "https://invoicemakerapi.azurewebsites.net/api/Customer/GetCustomer?id=" +
-        _id
-    )
+    fetch("https://invoicemakerapi.azurewebsites.net/api/GetCustomer?id=" + _id)
       .then((res) => res.json())
       .then((data) => {
         if (data.name !== "Not Found") setCustomer(data);
@@ -301,15 +338,30 @@ function CreateInvoice() {
               </DialogActions>
             </Dialog>
           </CardContent>
+          <Dialog
+            open={errorDialog}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Input Validation Error"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {inputValidation().message}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleErrorDialogClose}>OK</Button>
+            </DialogActions>
+          </Dialog>
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              if (
-                invoiceNumber !== "" &&
-                invoiceDate !== {} &&
-                customer !== {}
-              ) {
+              var { valid, message } = inputValidation();
+              if (valid) {
                 navigate("/add-employees", {
                   state: {
                     invoiceNumber: invoiceNumber,
@@ -324,7 +376,9 @@ function CreateInvoice() {
                     },
                   },
                 });
-              } else alert("Please fill out all fields.");
+              } else {
+                setErrorDialog(true);
+              }
             }}
           >
             Next
