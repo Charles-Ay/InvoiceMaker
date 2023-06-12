@@ -24,10 +24,10 @@ namespace InvoiceMaker
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:3000", "https://invoicemakerapi.azurewebsites.net", "https://invoice-maker-rose.vercel.app/").AllowAnyHeader().AllowAnyMethod();
-                });
+                builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             });
 
             var app = builder.Build();
