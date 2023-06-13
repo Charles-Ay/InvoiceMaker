@@ -18,6 +18,6 @@ namespace InvoiceMaker.Model
         public string Date { get; set; }
 
         [JsonProperty("role")]
-        public string Position { get; set; }
+        public string Role { get; set; }
     }
 }
