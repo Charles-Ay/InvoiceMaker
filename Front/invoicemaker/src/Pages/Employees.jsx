@@ -119,15 +119,20 @@ function Employees() {
       k = k.replaceAll('"\\', '"');
       k = k.replaceAll('\\"', '"');
       k = k.replaceAll('""', '"');
-
-      fetch("https://invoicemakerapi.azurewebsites.net/api/nvoice", {
+      fetch("https://invoicemakerapi.azurewebsites.net/api/invoice", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: k,
       })
-        .then((response) => response.blob())
+        .then((response) => {
+          if (response.ok) {
+            return response.blob();
+          } else {
+            alert("Error creating invoice");
+          }
+        })
         .then((blob) => {
           // Create a new object URL for the blob
           const url = window.URL.createObjectURL(blob);
