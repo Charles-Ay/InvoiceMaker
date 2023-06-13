@@ -12,16 +12,30 @@ namespace InvoiceMaker.Controllers
     {
         // GET: api/<InvoiceController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Invoice> Get()
         {
-            return new string[] { "value1", "value2" };
+            return InvoiceView.GetInvoices();
         }
 
-        // GET api/<InvoiceController>/5
+        //// GET api/<InvoiceController>/5
+        //[HttpGet("{id}")]
+        //public Invoice Get(string id)
+        //{
+        //    return InvoiceView.GetInvoice(id);
+        //}
+        
         [HttpGet("{id}")]
-        public string Get(int id)
+        public FileStreamResult Get(string id)
         {
-            return "value";
+            InvoiceView.CreateInvoice(InvoiceView.GetInvoice(id));
+            string path = @"Invoice.pdf";
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                stream.CopyTo(memory);
+            }
+            memory.Position = 0;
+            return File(memory, "application/pdf", Path.GetFileName(path));
         }
 
         // POST api/<InvoiceController>
@@ -29,6 +43,7 @@ namespace InvoiceMaker.Controllers
         public FileStreamResult Post([FromBody] Invoice invoice)
         {
             InvoiceView.CreateInvoice(invoice);
+            InvoiceView.SaveInvoice(invoice);
             string path = @"Invoice.pdf";
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))

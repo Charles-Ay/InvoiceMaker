@@ -1,9 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace InvoiceMaker.Model
 {
     public class Invoice
     {
+        [JsonProperty("_id")]
+        [BsonId]
+        public string _id { get; set; }
         [JsonProperty("invoiceNumber")]
         public string invoiceNumber { get; set; }
         [JsonProperty("invoiceDate")]

@@ -108,6 +108,7 @@ function Employees() {
     if (validation.valid) {
       setDisableBtn(true);
       let invoice = {
+        _id: "0",
         invoiceNumber: state.invoiceNumber,
         invoiceDate: state.invoiceDate,
         customer: state.customer,
