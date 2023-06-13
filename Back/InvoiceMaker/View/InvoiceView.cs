@@ -15,7 +15,7 @@ namespace InvoiceMaker.View
             {
                 emp.Date = emp.Date.Substring(0, indexOfT);
                 DateTime date = DateTime.Parse(emp.Date);
-                employees.Add(new InvoiceMakerLib.Employee(emp.Name, InvoiceMakerLib.Employee.Positions.RN, date, emp.Rate, emp.Hours));
+                employees.Add(new InvoiceMakerLib.Employee(emp.Name, InvoiceMakerLib.Employee.StringToPosition(emp.Position), date, emp.Rate, emp.Hours));
             }
             InvoiceMakerLib.Company company = new InvoiceMakerLib.Company(invoice.company.Name, invoice.company.Address, invoice.company.City, invoice.company.Province, invoice.company.PostalCode);
 

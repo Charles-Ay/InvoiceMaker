@@ -27,6 +27,28 @@ namespace InvoiceMakerLib
         {
             RN, RPN, PSW, Cook, Housekeeper, Maintenance, Administrator, Other
         }
-        
+
+        public static Positions StringToPosition(string s)
+        {
+            switch (s.ToLower())
+            {
+                case "rn":
+                    return Positions.RN;
+                case "rpn":
+                    return Positions.RPN;
+                case "psw":
+                    return Positions.PSW;
+                case "cook":
+                    return Positions.Cook;
+                case "housekeeper":
+                    return Positions.Housekeeper;
+                case "maintenance":
+                    return Positions.Maintenance;
+                case "administrator":
+                    return Positions.Administrator;
+                default:
+                    return Positions.Other;
+            }
+        }
     }
 }
