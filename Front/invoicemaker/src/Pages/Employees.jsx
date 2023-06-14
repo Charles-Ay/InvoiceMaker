@@ -25,6 +25,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { json, useLocation } from "react-router-dom";
 import { create } from "@mui/material/styles/createTransitions";
 import { set } from "date-fns";
+import { Link } from "react-router-dom";
 
 //https://localhost:7171/api/
 //https://invoicemakerapi.azurewebsites.net/api/
@@ -178,6 +179,15 @@ function Employees() {
           <Typography variant="h6" color="inherit">
             Create Invoice
           </Typography>
+          <Link to="/" style={{ textDecoration: "none", paddingLeft: 10 }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ marginLeft: "auto" }}
+            >
+              Home
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Card sx={{ minWidth: 275 }}>

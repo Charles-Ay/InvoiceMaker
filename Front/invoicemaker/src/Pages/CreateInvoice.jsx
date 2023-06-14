@@ -20,7 +20,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { json, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 var init = false;
 function CreateInvoice() {
@@ -75,14 +75,11 @@ function CreateInvoice() {
   };
 
   useEffect(() => {
-    if (!init) {
-      fetch("https://invoicemakerapi.azurewebsites.net/api/customer")
-        .then((res) => res.json())
-        .then((data) => {
-          setCustomers(data);
-        });
-      init = true;
-    }
+    fetch("https://invoicemakerapi.azurewebsites.net/api/customer")
+      .then((res) => res.json())
+      .then((data) => {
+        setCustomers(data);
+      });
     if (update) {
       pushCustomer();
       setUpdate(false);
@@ -142,6 +139,15 @@ function CreateInvoice() {
           <Typography variant="h6" color="inherit">
             Create Invoice
           </Typography>
+          <Link to="/" style={{ textDecoration: "none", paddingLeft: 10 }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ marginLeft: "auto" }}
+            >
+              Home
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <div

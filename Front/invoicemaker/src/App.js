@@ -37,9 +37,11 @@ function App() {
               Create Invoice
             </Button>
           </Link>
-          <Button variant="contained" color="primary" style={{ marginTop: 10, marginLeft: 10 }}>
-            View Invoices
-          </Button>
+          <Link to="/view-invoices" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" style={{ marginTop: 10, marginLeft: 10 }}>
+              View Invoices
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </ThemeProvider>
