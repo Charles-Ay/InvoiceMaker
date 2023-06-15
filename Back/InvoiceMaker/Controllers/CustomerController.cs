@@ -1,4 +1,4 @@
-﻿using InvoiceMaker.Model;
+﻿using InvoiceEntities;
 using InvoiceMaker.View;
 using Microsoft.AspNetCore.Mvc;
 

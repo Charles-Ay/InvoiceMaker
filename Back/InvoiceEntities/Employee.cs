@@ -1,29 +1,45 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace InvoiceMakerLib
+namespace InvoiceEntities
 {
     public class Employee
     {
-        public string? Name { get;}
-        public Positions? Position { get;}
-        public DateTime Date { get;}
-        public decimal HourlyRate { get; }
-        public decimal HoursWorked { get;}
-        
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("rate")]
+        public decimal Rate { get; set; }
+
+        [JsonProperty("hours")]
+        public decimal Hours { get; set; }
+
+        [JsonProperty("date")]
+        public string Date { get; set; }
+
+        [JsonProperty("role")]
+        public string Role { get; set; }
+
         public Employee(string name, Positions position, DateTime date, decimal hourlyRate, decimal hoursWorked)
         {
             Name = name;
-            Position = position;
-            Date = date;
-            HourlyRate = hourlyRate;
-            HoursWorked = hoursWorked;
+            Role = position.ToString();
+            Date = date.ToString("yyyy-MM-dd");
+            Rate = hourlyRate;
+            Hours = hoursWorked;
         }
 
-        public enum Positions 
+        public Employee()
+        {
+
+        }
+
+        public enum Positions
         {
             RN, RPN, PSW, Cook, Housekeeper, Maintenance, Administrator, Other
         }

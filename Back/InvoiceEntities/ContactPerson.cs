@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace InvoiceMaker.Model
+namespace InvoiceEntities
 {
     public class ContactPerson
     {
@@ -9,5 +9,15 @@ namespace InvoiceMaker.Model
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        public ContactPerson(string name, string email)
+        {
+            Name = name;
+            Email = email;
+        }
+
+        public ContactPerson()
+        {
+        }
     }
 }

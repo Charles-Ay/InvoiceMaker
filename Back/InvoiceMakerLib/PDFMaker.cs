@@ -1,4 +1,5 @@
-﻿using iText.Kernel.Colors;
+﻿using InvoiceEntities;
+using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
@@ -11,7 +12,7 @@ namespace InvoiceMakerLib
 {
     public class PDFMaker
     {
-        public void CreatePdf(InvoiceData data)
+        public void CreatePdf(Invoice data)
         {
             var writer = new PdfWriter("Invoice.pdf");
             var pdf = new PdfDocument(writer);
@@ -21,7 +22,7 @@ namespace InvoiceMakerLib
             document.Add(new Paragraph(data.Company.Name!.ToUpper() +".").SetFontSize(16).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")));
             document.Add(new Paragraph($"{data.Company.Address!.ToUpper()}, \n{data.Company.City!.ToUpper()}, {data.Company.Province!.ToUpper()}").SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibril.ttf")).SetFontSize(14));
             document.Add(new Paragraph(" "));
-            document.Add(new Paragraph("INVOICE DATE: " + data.Date.ToString("MM/dd/yyyy")).SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE));
+            document.Add(new Paragraph("INVOICE DATE: " + data.InvoiceDate).SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE));
             
             
             Paragraph p = new Paragraph("BILL TO").SetFontSize(15).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE);
@@ -32,7 +33,7 @@ namespace InvoiceMakerLib
             p.AddTabStops(new TabStop(470, TabAlignment.RIGHT));
             p.Add($"\t\t{data.InvoiceNumber}");
             document.Add(p);
-            p = new Paragraph($"{data.Customer.Name}\n{data.Customer.Address}\n{data.Customer.City}, {data.Customer.Province}, {data.Customer.PostalCode}\nC/O {data.Customer.ContactName}, Email: {data.Customer.ContactEmail}")
+            p = new Paragraph($"{data.Customer.Name}\n{data.Customer.Address}\n{data.Customer.City}, {data.Customer.Province}, {data.Customer.PostalCode}\nC/O {data.Customer.Contact.Name}, Email: {data.Customer.Contact.Email}")
                 .SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibri.ttf"));
             document.Add(p);
             document.Add(new Paragraph(" "));
@@ -42,7 +43,7 @@ namespace InvoiceMakerLib
             LineSeparator ls = new LineSeparator(line);
             ls.SetWidth(520);
             document.Add(ls);
-
+            
 
             p = new Paragraph("DESCRIPTION").SetFontSize(15).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/cambriab.ttf")).SetFontColor(ColorConstants.BLUE);
             p.Add(new Tab());
@@ -53,8 +54,8 @@ namespace InvoiceMakerLib
 
             foreach(var emp in data.Employees)
             {
-                var total = emp.HoursWorked * emp.HourlyRate;
-                p = new Paragraph($"{emp.Name} ({emp.Position}) {emp.Date.ToString("MMMM dd, yyyy")} - {emp.HoursWorked}hrs @ ${emp.HourlyRate}/hr. Total of ${total}").SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibri.ttf"));
+                var total = emp.Hours * emp.Rate;
+                p = new Paragraph($"{emp.Name} ({emp.Role}) {emp.Date} - {emp.Hours}hrs @ ${emp.Rate}/hr. Total of ${total}").SetFontSize(12).SetFont(PdfFontFactory.CreateFont("c:/windows/fonts/calibri.ttf"));
                 p.Add(new Tab());
                 p.AddTabStops(new TabStop(490, TabAlignment.RIGHT));
                 p.Add($"{total.ToString("#,0.00")}");

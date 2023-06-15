@@ -1,8 +1,12 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
-namespace InvoiceMaker.Model
+namespace InvoiceEntities
 {
     public class Customer
     {
@@ -28,5 +32,20 @@ namespace InvoiceMaker.Model
         [JsonProperty("contact")]
         public ContactPerson Contact { get; set; }
 
+        public Customer(string id, string name, string address, string city, string province, string postalCode, ContactPerson contact)
+        {
+            _id = id;
+            Name = name;
+            Address = address;
+            City = city;
+            Province = province;
+            PostalCode = postalCode;
+            Contact = contact;
+        }
+
+        public Customer()
+        {
+            
+        }
     }
 }

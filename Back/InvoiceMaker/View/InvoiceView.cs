@@ -1,4 +1,4 @@
-﻿using InvoiceMaker.Model;
+﻿using InvoiceEntities;
 using InvoiceMakerLib;
 using MongoDB.Driver;
 
@@ -8,31 +8,32 @@ namespace InvoiceMaker.View
     {
         public static void CreateInvoice(Invoice invoice)
         {
-            int indexOfT = invoice.invoiceDate.IndexOf("T");
+            int indexOfT = invoice.InvoiceDate.IndexOf("T");
             if (indexOfT >0)
             {
-                invoice.invoiceDate = invoice.invoiceDate.Substring(0, indexOfT);
+                invoice.InvoiceDate = invoice.InvoiceDate.Substring(0, indexOfT);
             }
 
-            List<InvoiceMakerLib.Employee> employees = new List<InvoiceMakerLib.Employee>();
-            foreach(var emp in invoice.employees)
+            List<Employee> employees = new List<Employee>();
+            foreach(var emp in invoice.Employees)
             {
                 if (indexOfT > 0)
                     emp.Date = emp.Date.Substring(0, indexOfT);
                 DateTime date = DateTime.Parse(emp.Date);
-                employees.Add(new InvoiceMakerLib.Employee(emp.Name, InvoiceMakerLib.Employee.StringToPosition(emp.Role), date, emp.Rate, emp.Hours));
+                employees.Add(new Employee(emp.Name, Employee.StringToPosition(emp.Role), date, emp.Rate, emp.Hours));
             }
-            InvoiceMakerLib.Company company = new InvoiceMakerLib.Company(invoice.company.Name, invoice.company.Address, invoice.company.City, invoice.company.Province, invoice.company.PostalCode);
+            Company company = new (invoice.Company.Name, invoice.Company.Address, invoice.Company.City, invoice.Company.Province, invoice.Company.PostalCode);
 
             PDFMaker pdf = new();
-            
-            InvoiceMakerLib.Customer customer = new InvoiceMakerLib.Customer(invoice.customer.Name, invoice.customer.Address, invoice.customer.City, invoice.customer.Province, invoice.customer.PostalCode, invoice.customer.Contact.Name, invoice.customer.Contact.Email);
-            pdf.CreatePdf(new InvoiceData(employees, customer, DateTime.Now, company, int.Parse(invoice.invoiceNumber)));
+
+            ContactPerson contact = new(invoice.Customer.Contact.Name, invoice.Customer.Contact.Email);
+            Customer customer = new Customer("", invoice.Customer.Name, invoice.Customer.Address, invoice.Customer.City, invoice.Customer.Province, invoice.Customer.PostalCode,contact);
+            pdf.CreatePdf(new Invoice("" ,employees, customer, DateTime.Now, company, invoice.InvoiceNumber));
         }
 
         public static void SaveInvoice(Invoice invoice)
         {
-            invoice._id = invoice.company.Name + "_" + MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            invoice._id = invoice.Company.Name + "_" + MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             Program.client.GetDatabase("InvoiceMaker").GetCollection<Invoice>("Invoices").InsertOne(invoice);
         }
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ILib = InvoiceMakerLib;
+using InvoiceEntities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +14,7 @@ namespace InvoiceMaker.Controllers
         public IEnumerable<string> Get()
         {
             List<string> roles = new();
-            foreach (ILib.Employee.Positions pos in Enum.GetValues(typeof(ILib.Employee.Positions)))
+            foreach (Employee.Positions pos in Enum.GetValues(typeof(Employee.Positions)))
             {
                 roles.Add(pos.ToString());  
             }
