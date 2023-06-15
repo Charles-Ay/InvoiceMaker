@@ -188,6 +188,11 @@ function ViewInvoices() {
                 </React.Fragment>
               ))}
             </List>
+            {invoicesData.length === 0 || invoicesData === undefined
+              ? () => {
+                  <Typography variant="h6">Loading...</Typography>;
+                }
+              : {}}
           </CardContent>
         </Card>
       </div>

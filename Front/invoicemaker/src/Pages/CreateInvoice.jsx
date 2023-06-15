@@ -64,8 +64,12 @@ function CreateInvoice() {
     } else if (company.province === "" || company.province === undefined) {
       message = "Please enter a company province.";
       valid = false;
-    } else if (company.postalCode === "" || company.postalCode === undefined) {
-      message = "Please enter a company postal code.";
+    } else if (
+      company.postalCode === "" ||
+      company.postalCode === undefined ||
+      isValidPostalCode(company.postalCode, "CA") === false
+    ) {
+      message = "Please enter a valid company postal code.(ex. A1A 1A1)";
       valid = false;
     } else if (customer.name === "" || customer.name === undefined) {
       message = "Please select a customer.";
@@ -109,6 +113,21 @@ function CreateInvoice() {
 
   const handleErrorDialogClose = () => {
     setErrorDialog(false);
+  };
+
+  const isValidPostalCode = (postalCode, countryCode) => {
+    let postalCodeRegex;
+    switch (countryCode) {
+      case "US":
+        postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
+        break;
+      case "CA":
+        postalCodeRegex = /^([A-Z][0-9][A-Z])\s*([0-9][A-Z][0-9])$/;
+        break;
+      default:
+        postalCodeRegex = /^(?:[A-Z0-9]+([- ]?[A-Z0-9]+)*)?$/;
+    }
+    return postalCodeRegex.test(postalCode);
   };
 
   const pushCustomer = () => {
